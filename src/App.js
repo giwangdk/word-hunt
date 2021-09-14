@@ -3,9 +3,12 @@ import './App.css';
 import axios from 'axios';
 import { Container } from '@material-ui/core';
 
+import Header from './components/Header/Header'
+
 function App() {
   const [word, setWord] = useState("")
   const [meanings, setMeanings] = useState([])
+  const [category, setCategory] = useState("en")
 
   const dictionaryAPI = async () => {
     try {
@@ -26,7 +29,7 @@ function App() {
   return (
     <div className="App" style={{height:'100vh', backgroundColor:'#282c34', color:'white'}}>
       <Container maxWidth="md" style={{display:'flex', flexDirection:'column', height:'100vh'}}>
-        Dictionary
+        <Header category={category} setCategory={setCategory}/>
       </Container>
     </div>
   );
