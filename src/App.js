@@ -12,7 +12,7 @@ function App() {
 
   const dictionaryAPI = async () => {
     try {
-      const {data} = await axios.get("https://api.dictionaryapi.dev/api/v2/entries/en/plane")
+      const {data} = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/${category}/${word}`)
       console.log(data);
       setMeanings(data)
     } catch (error) {
@@ -24,12 +24,14 @@ function App() {
 
   useEffect(() => {
     dictionaryAPI()
-  }, [])
+  }, [word, category])
+
+    
 
   return (
     <div className="App" style={{height:'100vh', backgroundColor:'#282c34', color:'white'}}>
       <Container maxWidth="md" style={{display:'flex', flexDirection:'column', height:'100vh'}}>
-        <Header category={category} setCategory={setCategory}/>
+        <Header category={category} setCategory={setCategory} word={word} setWord={setWord} setMeanings={setMeanings} meanings={meanings}/>
       </Container>
     </div>
   );

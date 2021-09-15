@@ -1,10 +1,10 @@
-import { TextField, ThemeProvider, createTheme, InputLabel, FormControl, MenuItem, Select } from '@material-ui/core';
+import { TextField, ThemeProvider, createTheme, MenuItem } from '@material-ui/core';
 import React from 'react';
 
 import './Header.css'
 import countries from '../../data/category'
 
-const Header = ({category, setCategory}) => {
+const Header = ({category, setCategory, word, setWord, meanings, setMeanings}) => {
     const darkTheme = createTheme({
         palette: {
             primary: {
@@ -12,21 +12,25 @@ const Header = ({category, setCategory}) => {
             },
           type: 'dark',
         },
-      });
+    });
+    
+    const handleChange = (e) => {
+        setCategory(e.target.value);
+        setWord("")
+    }
+
     return (
         <div className="header">
-            <span className="title">Word Hunt</span>
+            <span className="title">{word ? word : "Word Hunt"}</span>
             <div className="inputs">
                 <ThemeProvider theme={darkTheme}>
-                <TextField id="standard-basic" label="standard"/>
-                    <FormControl width={80}>
-                    <InputLabel id="demo-controlled-open-select-label">Select</InputLabel>
+                    <TextField id="standard-basic" className="search" label="Search a word" value={word} onChange={(e) => setWord(e.target.value)}/>
                     <TextField
                         select
                         label="Language"
                         value={category}
-                        onChange={(e) => setCategory(e.target.value)}
                         className="select"
+                        onChange={(e)=>handleChange(e)}
                     >
                         {countries.map((option) => (
                         <MenuItem key={option.label} value={option.label}>
@@ -34,7 +38,6 @@ const Header = ({category, setCategory}) => {
                         </MenuItem>
                         ))}
                     </TextField>
-                </FormControl>
                 </ThemeProvider>
             </div>
         </div>
