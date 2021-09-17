@@ -4,6 +4,13 @@ import './Definitions.css'
 const Definitions = ({word, meanings, category}) => {
     return (
         <div className="meanings">
+            {
+                meanings[0] && word && category === 'en' && (
+                    <audio src={meanings[0].phonetics[0] && meanings[0].phonetics[0].audio} style={{backgroundColor:"#fff", borderRadius:10}} controls>
+                        Your browser doesnt support audio element
+                    </audio>
+                )
+            }
             {word === "" ? (
                 <span className="subTitle">Start by typing a word in search</span>
             ) : (
