@@ -4,16 +4,17 @@ import React from 'react';
 import './Header.css'
 import countries from '../../data/category'
 
-const Header = ({category, setCategory, word, setWord, meanings, setMeanings}) => {
+const Header = ({category, setCategory, word, setWord, meanings, setMeanings, LightTheme}) => {
+    
     const darkTheme = createTheme({
         palette: {
-            primary: {
-                main:'#fff',
-            },
-          type: 'dark',
+          primary: {
+            main: LightTheme ? "#000" : "#fff",
+          },
+          type: LightTheme ? "light" : "dark",
         },
-    });
-    
+      });
+
     const handleChange = (e) => {
         setCategory(e.target.value);
         setWord("")
